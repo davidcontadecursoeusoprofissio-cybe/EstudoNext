@@ -10,7 +10,7 @@ async function abrirBanco(){
     });
     await db.exec(`
         CREATE TABLE IF NOT EXISTS users(
-            id INTEGER PRIMARY KEY AUTOINCREMET
+            id INTEGER PRIMARY KEY AUTOINCREMENT
             ,
             nome TEXT NOT NULL ,
             idade INTEGER NOT NULL,
