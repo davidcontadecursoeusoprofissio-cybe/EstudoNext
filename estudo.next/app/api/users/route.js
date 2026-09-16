@@ -34,7 +34,7 @@ async function abrirBanco(){
         const db = await abrirBanco();
 
         const resultado = await db.run(
-            `INSERT INTO users (nome, idade, foto)VALUE (?,?,?)`
+            `INSERT INTO users (nome, idade, foto)VALUE (?,?,?)`,
             [nome, idade, foto ?? null]
         );
 

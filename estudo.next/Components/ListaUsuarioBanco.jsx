@@ -10,7 +10,7 @@ export default function ListaDeUsuariosBanco(){
         evento.preventDefault()
         const resposta = await fetch ("/api/users",{
             method: "POST",
-            headers: {"Content-Type":"Aplication/json"                
+            headers: {"Content-Type":"application/json"                
             },
             body: JSON.stringify({nome,idade:Number(idade),foto})
         })
