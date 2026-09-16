@@ -6,7 +6,7 @@ import path from "path";
 async function abrirBanco(){
     const db = await open({
         filename: path.join(process.cwd(), 'database.db'),
-        driver: sqlite3.database
+        driver: sqlite3.Database
     });
     await db.exec(`
         CREATE TABLE IF NOT EXISTS users(
