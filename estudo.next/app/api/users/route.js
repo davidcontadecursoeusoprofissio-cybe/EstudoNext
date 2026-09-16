@@ -33,16 +33,12 @@ async function abrirBanco(){
 
         const db = await abrirBanco();
 
-        const resultado = await db.run(
-            `INSERT INTO users (nome, idade, foto)VALUE (?,?,?)`,
+        await db.run(
+            `INSERT INTO users (nome, idade, foto) VALUES (?,?,?)`,
             [nome, idade, foto ?? null]
         );
 
-        const usuarioCriado = await db.get(
-            `SELECT * FROM users WHERE id=?`,
-            [resultado.lastID]
-        );
-        return NextResponse.json(usuarioCriado, {status: 201})
+        return NextResponse.json({ mensagem: "Cadastrado com sucesso" }, {status: 201})
     }
 
    
