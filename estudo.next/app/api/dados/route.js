@@ -19,6 +19,7 @@ async function abrirBanco(){
         `);
 
         export async function GET(){
+            const db = await abrirBanco();
             const usuarios = await db.all('SELECT * FROM dados')
             return NextResponse.json(usuarios)
         }
