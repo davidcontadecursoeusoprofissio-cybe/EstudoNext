@@ -31,18 +31,20 @@ export default function Bancodedadosdodados(){
     <>
     {
         usuarios.map((usuario) => {
-            <li Key={usuario}>
+   return  (
+            <li key={usuario.id}>
                 {usuario.nome}-{usuario.email}-{usuario.senha}
             </li>
+            )
         })
     }
     <form onSubmit={cadastro}>
         <input type="text" value={nome} placeholder="Digite seu nome:" onChange={(e) => setNome(e.target.value)} />
         <input type="text" value={email} placeholder="Digite seu email:" onChange={(e) => setEmail(e.target.value)} />
         <input type="password" value={senha} placeholder="Digite sua senha:" onChange={(e) => setSenha(e.target.value)} />
+    <button type="submit">Cadastrar</button>
     </form>
 
-    <button type="submit">Cadastrar</button>
     </>
  )
 }
