@@ -2,9 +2,14 @@
 import { useEffect, useState } from "react";
 
 export default function DadosAlunos(){
+
+    
     const [alunos, setAlunos] = useState([])
     const [nome, setNome] = useState("")
     const [nota, setNota] = useState("")
+
+
+
 
     async function cadastro(evento) {
         evento.preventDefault()
@@ -18,6 +23,9 @@ export default function DadosAlunos(){
         setNome("")
         setNota("")
     }
+
+
+
 
     useEffect(()=>{
         fetch("/api/dadosnotas")
@@ -55,5 +63,5 @@ export default function DadosAlunos(){
 
 
 
-    
+
 }
