@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-export default function DadosAlunos(){
+export default function dadosalunos(){
     const [alunos, setAlunos] = useState([])
     const [nome, setNome] = useState("")
     const [nota, setNota] = useState("")
