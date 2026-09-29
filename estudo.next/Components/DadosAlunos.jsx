@@ -34,7 +34,7 @@ export default function DadosAlunos(){
             }
             <form onSubmit={cadastro}>
                 <input type="text" value={nome} placeholder="Digite o nome do aluno" onChange={(e) => setNome(e.target.value)} />
-                <input type="text" value={nota} placeholder="Digite a nota do aluno" onChange={(e) => setNota(e.target.value)} />
+                <input type="number" value={nota} placeholder="Digite a nota do aluno" onChange={(e) => setNota(e.target.value)} />
                 <button type="submit">cadastra nota</button>
             </form>
             </>
