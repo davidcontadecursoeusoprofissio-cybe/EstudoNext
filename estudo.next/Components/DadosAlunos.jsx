@@ -25,6 +25,14 @@ export default function DadosAlunos(){
         .then((dadosdoBanco) => {setAlunos(dadosdoBanco)})
     }, [])
 
+
+
+
+
+
+
+
+
     return(
         <>
         {
@@ -43,4 +51,9 @@ export default function DadosAlunos(){
         </form>
         </>
     )
+
+
+
+
+    
 }
