@@ -21,9 +21,9 @@ async function abrirBanco(){
 export async function GET(){
     const db = await abrirBanco();
 
-    const alunos = await db.all('SELECT * FROM dadosnotas')
+    const alunos = await db.all('SELECT * FROM dadosnotas');
 
-    return NextResponse.json(alunos)
+    return NextResponse.json(alunos);
 }
 
 export async function POST(request){
