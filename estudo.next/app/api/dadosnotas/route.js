@@ -18,6 +18,12 @@ async function abrirBanco(){
         return db;
 }
 
+
+
+
+
+
+
 export async function GET(){
     const db = await abrirBanco();
 
@@ -25,6 +31,12 @@ export async function GET(){
 
     return NextResponse.json(alunos);
 }
+
+
+
+
+
+
 
 export async function POST(request){
     const dados = await request.json();
