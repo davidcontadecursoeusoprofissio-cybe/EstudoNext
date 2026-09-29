@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
-export default function dadosalunos(){
+
+export default function DadosAlunos(){
     const [alunos, setAlunos] = useState([])
     const [nome, setNome] = useState("")
     const [nota, setNota] = useState("")
@@ -17,28 +18,29 @@ export default function dadosalunos(){
         setNome("")
         setNota("")
     }
+
     useEffect(()=>{
         fetch("/api/dadosnotas")
         .then((resposta)=> resposta.json())
-        .then((dadosdoBanco) => {setAlunos(dadosdoBanco)}, [])
-        return(
-            <>
-            {
-                alunos.map((alunos)=>{
-                    return(
-                        <li key={alunos.id}>
-                            {alunos.nome}-{alunos.nota}
-                        </li>
-                    )
-                })
-            }
-            <form onSubmit={cadastro}>
-                <input type="text" value={nome} placeholder="Digite o nome do aluno" onChange={(e) => setNome(e.target.value)} />
-                <input type="number" value={nota} placeholder="Digite a nota do aluno" onChange={(e) => setNota(e.target.value)} />
-                <button type="submit">cadastra nota</button>
-            </form>
-            </>
-        )
-    })
+        .then((dadosdoBanco) => {setAlunos(dadosdoBanco)})
+    }, [])
 
+    return(
+        <>
+        {
+            alunos.map((alunos)=>{
+                return(
+                    <li key={alunos.id}>
+                        {alunos.nome}-{alunos.nota}
+                    </li>
+                )
+            })
+        }
+        <form onSubmit={cadastro}>
+            <input type="text" value={nome} placeholder="Digite o nome do aluno" onChange={(e) => setNome(e.target.value)} />
+            <input type="number" value={nota} placeholder="Digite a nota do aluno" onChange={(e) => setNota(e.target.value)} />
+            <button type="submit">cadastra nota</button>
+        </form>
+        </>
+    )
 }
