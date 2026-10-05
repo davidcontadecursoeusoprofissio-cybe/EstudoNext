@@ -13,7 +13,7 @@ export default function MensagemUsuario(){
             headers:{"Content-Type":"application/json"},
             body: JSON.stringify({remetente, mensagem})
         });
-        setRmetente("");
+        setRemetente("");
         setMensagem("");
     }
 
