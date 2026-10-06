@@ -2,8 +2,8 @@
 import {useEffect, useState} from "react";
 
 export default function MensagemAdministrador(){
-    const [mensagens, setMensagens] = useState([]);
-    const [resposta, setResposta] = useState("");
+   const [mensagens, setMensagens] = useState([]);
+   const [resposta, setResposta] = useState("");
 
    const carregarMensagens = () => {
         fetch("/api/duaslista")
@@ -29,7 +29,7 @@ export default function MensagemAdministrador(){
    }
 
    async function apagarMensagem(id, tipo){
-        await fetch(`/api/duaslista?id=${id}&tipo=${tipo}`,{
+        await fetch(`/api/duaslista?id=id&tipo={tipo}`,{
             method: "DELETE"
         });
         carregarMensagens();
@@ -66,3 +66,4 @@ export default function MensagemAdministrador(){
         </div>       
     );
 }
+
