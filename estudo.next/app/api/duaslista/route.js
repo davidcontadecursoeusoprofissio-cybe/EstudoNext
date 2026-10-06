@@ -1,6 +1,6 @@
-import { NextResponse} from "next/server";
+import { NextResponse } from "next/server";
 import sqlite3 from 'sqlite3';
-import { open} from 'sqlite';
+import { open } from 'sqlite';
 import path from "path";
 
 async function abrirBanco(){
@@ -17,52 +17,44 @@ async function abrirBanco(){
         deletado_admin INTEGER DEFAULT 0,
         deletado_todos INTEGER DEFAULT 0
         )
-        `);
-        return db;
+    `);
+    return db;
 }
-
-
 
 export async function GET(){
     const db = await abrirBanco();
-
-    const listaUsuario = await db.all('SELECT *  FROM duaslista WHERE deletado_todos =0');
-
-    const listaAdmin = await db.all('SELECT * FROM duaslista WHERE deletado_todos =0');
-
+    const listaUsuario = await db.all('SELECT * FROM duaslista WHERE deletado_todos = 0');
+    const listaAdmin = await db.all('SELECT * FROM duaslista WHERE deletado_todos = 0');
     return NextResponse.json([listaUsuario, listaAdmin]);
 }
-
-
-
-
 
 export async function POST(request){
     const dados = await request.json();
     const { remetente, mensagem } = dados;
     const db = await abrirBanco();
 
-    await db.run(`
-        INSERT INTO dadosduas(remetente, mensagem) VALUES (?,?)`,
-        [remetente, mensagem ??""]
+    // Corrigido o nome da tabela para "duaslista"
+    await db.run(
+        `INSERT INTO duaslista (remetente, mensagem) VALUES (?, ?)`,
+        [remetente, mensagem ?? ""]
     );
 
-    return NextResponse.json({mensagem:"Mensagem cadastrada"}, {status:201});
+    return NextResponse.json({ mensagem: "Mensagem cadastrada" }, { status: 201 });
 }
 
 export async function DELETE(request){
-    const {searchParams} = new URL(request.url);
+    const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     const tipo = searchParams.get("tipo");
 
     const db = await abrirBanco();
 
-    if(tipo ==="todos"){
-        await db.run(`UPDATE duaslista SET deletado_todos = 1 WHERE id =?`,[id]);
-    }else if(tipo ==="usuario"){
-        await db.run(`UPDATE duaslista SET deletado_usuario = 1 WHERE id =?`,[id]);
-    }else if(tipo === "admin"){
-        await db.run(`UPDATE duaslista SET deletado_admin = 1 WHERE id = ?`,[id]);
+    if(tipo === "todos"){
+        await db.run(`UPDATE duaslista SET deletado_todos = 1 WHERE id = ?`, [id]);
+    } else if(tipo === "usuario"){
+        await db.run(`UPDATE duaslista SET deletado_usuario = 1 WHERE id = ?`, [id]);
+    } else if(tipo === "admin"){
+        await db.run(`UPDATE duaslista SET deletado_admin = 1 WHERE id = ?`, [id]);
     }
-    return NextResponse.json({mensagem:"Mensagem atualizada"});
+    return NextResponse.json({ mensagem: "Mensagem atualizada" });
 }
