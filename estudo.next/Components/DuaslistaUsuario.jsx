@@ -16,9 +16,6 @@ export default function MensagemUsuario(){
     },[]);
     async function enviar(e){ //olhar
 
-    }
-    
-    async function enviar(e){
         e.preventDefault();
         if(!remetente.trim() || !mensagem.trim() )
         return;
@@ -31,6 +28,8 @@ export default function MensagemUsuario(){
         setMensagem("");
         carregarMensagens();
     }
+    
+ 
 
     async function apagarMensagem(id, tipo){
         await fetch(`\api\duaslista?id=id&tipo = {tipo}`,{
@@ -48,15 +47,21 @@ export default function MensagemUsuario(){
                 <input type="text" value={mensagem} onChange={(e)=> setMensagem(e.target.value)}/>
                 <button type="submit">Enviar</button>
             </form>
-      <ul>    //olhar
-                {mensagens.map((mensagem)=>{
+            <ul>
+                {mensagens.map((msg)=>{
+                    if (msg.deletado_usuario === 1) return null;
+                    const ehMinhaMensagem = msg.remetente !== "Admin";
                     return(
-                        <li key={mensagem.id}>
-                            {`Remetente: ${mensagem.remetente} - Mensagem: ${mensagem.mensagem}`}
+                        <li key={msg.id} style={{margin: "10px 0"}}>
+                            {`Remetente:${msg.remetente} - Mensagem:${msg.mensagem}`}
+                            <button onClick={() => apagarMensagem(msg.id, "usuario")}>Apagar para mim</button>
+                            <button onClick={() => apagarMensagem(msg.id, "todos")}>Apagar para todos</button>
+
                         </li>
-                    )
+                    );
                 })}
-            </ul>
+
+            </ul>   
         </div>
     );
 }
